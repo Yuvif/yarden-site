@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.hover-underline-animation {
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #3b82f6);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-underline-animation:hover::after,
+.hover-underline-animation:focus-visible::after {
+  opacity: 1;
+}
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(15px, -10px) scale(1.1);
+  }
+  66% {
+    transform: translate(-15px, 10px) scale(0.9);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .hero-ring {
+    width: 220px !important;
+    height: 220px !important;
+  }
+}
+
+nav {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* You can optionally add this if you want fallback animation without framer-motion */
+button:hover span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #14b8a6; /* teal-400 */
+  transform-origin: left;
+  animation: underline-expand 0.3s forwards;
+}
+
+@keyframes underline-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
