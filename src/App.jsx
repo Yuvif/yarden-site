@@ -6,6 +6,7 @@ import Services from "./components/Services";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import SocialBar from "./components/SocialBar";
+import Recommendations from "./components/Recommendations";
 
 const App = () => {
   return (
@@ -15,12 +16,13 @@ const App = () => {
         <Hero />
         <About />
         <Services />
+        <Recommendations />
         <FAQ />
         <Contact />
         <SocialBar/>
       </main>
-      <footer className="text-center text-gray-600 py-6 bg-white">
-        © {new Date().getFullYear()} ירדן | טיפול ספורטיבי
+      <footer className="text-center text-gray-600 py-6 bg-white select-none">
+        © {new Date().getFullYear()} Yuvif
       </footer>
     </div>
   );

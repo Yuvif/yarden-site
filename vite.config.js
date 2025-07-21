@@ -1,7 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
+// 👇 Add your repo name here
+const repoName = 'yarden-site';
+
 export default defineConfig({
+  base: `/${repoName}/`, // 👈 Required for GitHub Pages
   plugins: [react()],
-})
+});

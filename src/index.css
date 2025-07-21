@@ -58,28 +58,3 @@ body {
   }
 }
 
-nav {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* You can optionally add this if you want fallback animation without framer-motion */
-button:hover span::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background-color: #14b8a6; /* teal-400 */
-  transform-origin: left;
-  animation: underline-expand 0.3s forwards;
-}
-
-@keyframes underline-expand {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}

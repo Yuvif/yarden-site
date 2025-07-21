@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
-import { Typewriter } from "react-simple-typewriter";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 
 import aboutImg1 from "../assets/about1.jpeg";
 import aboutImg2 from "../assets/about2.jpeg";
@@ -17,106 +15,94 @@ const About = () => {
     <section
       id="about"
       dir="rtl"
-      className="relative scroll-mt-32 py-28 px-6 md:px-20 bg-gradient-to-b from-[#eaf4ff] to-white text-gray-900 overflow-hidden"
+      className="relative scroll-mt-32 py-32 px-6 md:px-20 bg-[#f4f4f4] text-gray-900 overflow-hidden select-none"
     >
-      {/* Background Blob Accent */}
-      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-blue-300 opacity-20 blur-3xl rounded-full pointer-events-none z-0"></div>
+      {/* Decorative ambient glows */}
+      <div className="absolute top-[-100px] left-[-150px] w-[400px] h-[400px] bg-[#037fae]/30 blur-[100px] rounded-full z-0" />
+      <div className="absolute bottom-[-80px] right-[-120px] w-[300px] h-[300px] bg-[#037fae]/20 blur-[100px] rounded-full z-0" />
 
-      <div className="select-none max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-16 relative z-10">
-        {/* Text Section */}
+      {/* Content container */}
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row gap-20 items-center justify-between">
+
+        {/* TEXT SECTION */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex-1 space-y-8 will-change-transform-opacity"
         >
-      <h2
-        className="
-          text-6xl
-          font-extrabold
-          text-blue-900
-          relative
-          select-none
-          before:absolute
-          before:-bottom-2
-          before:left-0
-          before:w-24
-          before:h-1.5
-          before:rounded-full
-          before:bg-gradient-to-r
-          before:from-teal-400
-          before:via-blue-600
-          before:to-teal-400
-          before:shadow-lg
-        "
-        style={{ paddingBottom: '0.5rem' }}
-      >
-        מי אני
-    </h2>
+          <h2 className="text-6xl font-black tracking-tight text-[#037fae] drop-shadow-md">
+            מי אני
+          </h2>
 
-
-
-          <div className="space-y-6 text-xl leading-relaxed text-gray-800">
+          <div className="text-xl space-y-5 text-gray-800 leading-relaxed">
             <p>
-              <strong className="text-blue-800 font-semibold">נעים מאוד,</strong> אני ירדן לוי – ספורטתרפיסט מוסמך (B.Sc), מומחה בטיפול בכאבים ובפציעות אורתופדיות.
+              <span className="text-[#037fae] font-bold">נעים מאוד,</span> אני ירדן לוי – ספורטתרפיסט מוסמך (B.Sc) עם התמחות בטיפול בכאב ובפציעות אורתופדיות.
             </p>
-
             <p>
-              אני <span className="font-bold">מאמין שטיפול טוב</span> מתחיל מהבנה עמוקה של האדם – לא רק איפה כואב לו, אלא איך הוא חי, זז, ישן ומתאמן.
+              אני מאמין שהגוף יודע לרפא את עצמו – כשנותנים לו את הכלים הנכונים.
             </p>
-
             <p>
-              <span className="text-blue-700 font-medium">עם ניסיון של מעל חמש שנים</span> בטיפול בלקוחות פרטיים ובספורטאים בליגת העל, אני משלב מקצועיות עם רגישות ואכפתיות.
+              בעזרת שילוב בין טיפול ידני, תנועה מחודשת ותרגול מותאם אישית – אפשר להגיע לתוצאות אמיתיות.
             </p>
-
             <p>
-              אני מטפל בגישה שמשלבת בין <span className="font-semibold">מגע, תנועה וחיזוק</span> – שילוב של טיפול ידני ואקטיבי יחד.
-            </p>
-
-            <p className="font-bold text-blue-900 text-2xl mt-6">
-              הקשבה. התאמה אישית. חיים נטולי מגבלות.
+              עבדתי עם מאות מטופלים – ביניהם גם ספורטאי ליגת העל – והמטרה תמיד ברורה: 
+              <br />
+              <motion.span
+                whileInView={{ scale: [0.95, 1], opacity: [0, 1] }}
+                transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+                className="text-[#025e85] font-bold text-2xl block mt-4"
+              >
+                חזרה לחיים של תנועה – ללא כאב.
+              </motion.span>
             </p>
           </div>
         </motion.div>
 
-        {/* Swiper with Coverflow effect */}
+        {/* SWIPER IMAGE SECTION */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="relative w-full h-[450px] bg-white/40 backdrop-blur-md rounded-3xl shadow-2xl border border-white/30 overflow-hidden"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex-1 max-w-[460px] w-full rounded-[32px] p-[3px] bg-gradient-to-tr from-[#037fae] to-[#66d6ff] shadow-2xl backdrop-blur-md will-change-transform-opacity"
         >
-          <Swiper
-            modules={[Autoplay, Pagination, EffectCoverflow]}
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={"auto"}
-            loop
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            coverflowEffect={{
-              rotate: 20,
-              stretch: 0,
-              depth: 100,
-              modifier: 2,
-              slideShadows: true,
-            }}
-            className="w-full h-full"
-          >
-            {images.map((img, idx) => (
-              <SwiperSlide
-                key={idx}
-                className="w-[300px] h-[400px] flex items-center justify-center rounded-2xl overflow-hidden bg-white shadow-md"
-              >
-                <img
-                  src={img}
-                  alt={`תמונה ${idx + 1}`}
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="bg-white/60 rounded-[28px] overflow-hidden backdrop-blur-md">
+            <Swiper
+              modules={[Autoplay, EffectCoverflow]}
+              effect="coverflow"
+              grabCursor
+              centeredSlides
+              loop
+              slidesPerView={"auto"}
+              autoplay={{ delay: 3200 }}
+              coverflowEffect={{
+                rotate: 10,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+                slideShadows: true,
+              }}
+              className="w-full h-[480px]"
+            >
+              {images.map((img, idx) => (
+                <SwiperSlide
+                  key={idx}
+                  className="w-[320px] h-[460px] flex items-center justify-center"
+                >
+                  <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    src={img}
+                    alt={`תמונה ${idx + 1}`}
+                    className="w-full h-full object-cover rounded-xl shadow-md"
+                    draggable={false}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </motion.div>
       </div>
     </section>

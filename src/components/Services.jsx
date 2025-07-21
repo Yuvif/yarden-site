@@ -1,5 +1,8 @@
 import { Heart, Target, User } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
+import servicesBackground from "../assets/muscle-icon.png";
+const calmWave = new URL("../assets/calm-wave.svg", import.meta.url).href;
+
 
 const services = [
   {
@@ -22,11 +25,20 @@ const services = [
 const Services = () => (
   <section
     id="services"
-    className="relative bg-gradient-to-b from-[#f3f9ff] to-white py-28 px-6 md:px-20 text-right select-none"
+    className="relative pt-28 pb-28 px-6 md:px-20 text-right select-none"
+    style={{
+      backgroundImage: `url(${calmWave}), url(${servicesBackground})`,
+      backgroundBlendMode: "overlay",
+      backgroundSize: "cover, 200px",
+      backgroundRepeat: "no-repeat, repeat",
+      backgroundPosition: "center, center",
+      backgroundAttachment: "fixed",
+      backgroundColor: "#f7fbff", // base color to soften PNG and keep clarity
+    }}
   >
-    <div className="max-w-7xl mx-auto">
+    <div className="relative max-w-7xl mx-auto z-10">
       <motion.h2
-        className="text-4xl md:text-5xl font-extrabold text-blue-800 mb-16 text-center drop-shadow-sm"
+        className="will-change-transform-opacity text-4xl md:text-5xl font-extrabold text-[#037fae] mb-16 text-center drop-shadow-md"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -41,16 +53,18 @@ const Services = () => (
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1, duration: 0.6 }}
-            className="group bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl border border-blue-50 hover:border-blue-200 transition-all duration-300"
+            className="will-change-transform-opacity group bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl border border-white/40 hover:border-blue-300 transition-all duration-300"
           >
             <div className="flex justify-end mb-6">
-              <div className="bg-gradient-to-r from-blue-500 to-teal-400 p-4 rounded-full shadow-md transition-transform group-hover:scale-110">
+              <div className="bg-[#037fae] p-4 rounded-full shadow-md transition-transform group-hover:scale-110">
                 <Icon size={36} className="text-white" />
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-blue-800 mb-3">{title}</h3>
-            <p className="text-lg text-gray-700 leading-relaxed">{desc}</p>
+            <h3 className="text-2xl font-bold text-[#037fae] mb-3 drop-shadow-sm">
+              {title}
+            </h3>
+            <p className="text-lg text-gray-800 leading-relaxed">{desc}</p>
           </motion.div>
         ))}
       </div>

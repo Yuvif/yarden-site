@@ -9,8 +9,8 @@ const SocialBar = () => {
   const googleSearchUrl = "https://www.google.com/search?q=ירדן+לוי+https://www.google.com/search?q=Yarden%27s+Massage+Therapy-+%D7%99%D7%A8%D7%93%D7%9F+%D7%A2%D7%99%D7%A1%D7%95%D7%99+%D7%98%D7%99%D7%A4%D7%95%D7%9C%D7%99&stick=H4sIAAAAAAAA_-NgU1I1qDAyMDVKNbc0SE00NkpJMza3MqhIMUozTjFIMjc0MjM0STROXcRqFZlYlJKap16s4JtYX";
 
   // Base colors (you can adjust these)
-  const baseBg = "bg-blue-700";
-  const hoverBg = "hover:bg-blue-800";
+  const baseBg = "bg-[#037fae]";
+  const hoverBg = "hover:bg-[#005096]";
   const textColor = "text-white";
 
   // Individual accent colors for icons (kept subtle)

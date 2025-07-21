@@ -26,3 +26,7 @@
   0%, 100% { transform: translate(0px, 0px); }
   50% { transform: translate(30px, -20px); }
 }
+
+.will-change-transform-opacity {
+  will-change: transform, opacity;
+}

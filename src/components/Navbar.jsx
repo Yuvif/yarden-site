@@ -1,95 +1,153 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { List, X } from "@phosphor-icons/react";
+import { List, X, User, ChatText, Info, Question, Phone } from "@phosphor-icons/react";
 
 const navItems = [
-  { id: "about", label: "אודות" },
-  { id: "services", label: "שירותים" },
-  { id: "faq", label: "שאלות ותשובות" },
-  { id: "contact", label: "צור קשר" },
+  { id: "about", label: "אודות", icon: <User size={16} /> },
+  { id: "services", label: "שירותים", icon: <ChatText size={16} /> },
+  { id: "recommendations", label: "המלצות", icon: <Info size={16} /> },
+  { id: "faq", label: "שאלות ותשובות", icon: <Question size={16} /> },
+  { id: "contact", label: "צור קשר", icon: <Phone size={16} /> },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [activeButtonRect, setActiveButtonRect] = useState(null);
+
+  const desktopRefs = useRef({});
 
   useEffect(() => {
-    const onScroll = () => {
+    const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      if (window.scrollY > 50 && menuOpen) setMenuOpen(false);
+      const sectionIds = ["hero", ...navItems.map(({ id }) => id)];
+      const scrollOffset = window.innerHeight / 2;
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= scrollOffset && rect.bottom >= scrollOffset) {
+          current = id;
+          break;
+        }
+      }
+
+      setActiveSection(current === "hero" ? "" : current);
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [menuOpen]);
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (activeSection && desktopRefs.current[activeSection]) {
+      const buttonEl = desktopRefs.current[activeSection];
+      const container = document.querySelector(".nav-container")?.getBoundingClientRect();
+      const rect = buttonEl.getBoundingClientRect();
+
+      if (container) {
+        setActiveButtonRect({
+          left: rect.left - container.left,
+          width: rect.width,
+        });
+      }
+    } else {
+      setActiveButtonRect(null);
+    }
+  }, [activeSection, menuOpen]);
 
   const scrollTo = (id) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  return (
-    <nav
-      dir="rtl"
-      className={`select-none fixed top-0 right-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-xl"
-          : "bg-white/90 shadow-md"
-      }`}
-      style={{ height: 80 }}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-12 h-full">
-        <h1
-          onClick={() => scrollTo("hero")}
-          className={`cursor-pointer font-extrabold text-blue-900 select-none transition-colors duration-300 text-2xl md:text-3xl ${
-            scrolled ? "text-teal-600" : "text-blue-900"
-          }`}
-          tabIndex={0}
-          aria-label="Go to top"
-        >
-          ירדן | טיפול ספורטיבי
-        </h1>
+  const getDesktopButtonClass = (id) =>
+    `relative select-none text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-1 ${
+      activeSection === id
+        ? "text-white bg-[#037fae] shadow"
+        : "text-sky-900 hover:text-[#037fae] hover:bg-white/30"
+    }`;
 
-        <ul className="hidden md:flex gap-8">
-          {navItems.map(({ id, label }) => (
-            <motion.li
-              key={id}
-              whileHover={{ scale: 1.12 }}
-              transition={{ type: "spring", stiffness: 350 }}
-            >
-              <button
-                onClick={() => scrollTo(id)}
-                className={`select-none text-lg font-semibold px-6 py-2 rounded-full border-2 border-transparent transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 ${
-                  scrolled
-                    ? "text-teal-700 hover:bg-teal-100 hover:border-teal-400"
-                    : "text-blue-900 hover:bg-blue-100 hover:border-blue-400"
-                }`}
-              >
-                {label}
-              </button>
-            </motion.li>
-          ))}
-        </ul>
+  const getMobileButtonClass = (id) =>
+    `select-none block w-full text-right font-semibold px-5 py-3 rounded-full transition-all duration-300 ${
+      activeSection === id
+        ? "text-white bg-[#037fae]"
+        : "text-blue-900 hover:bg-blue-100"
+    }`;
+
+  return (
+    <motion.nav
+      dir="rtl"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`will-change-transform-opacity fixed top-6 left-0 right-0 mx-auto w-fit max-w-full px-6 py-3 z-50 rounded-full transition-all duration-300 backdrop-blur-md border border-white/20 ${
+        scrolled ? "shadow-lg bg-white/60" : "shadow-xl bg-white/40"
+      } hover:shadow-2xl before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-r before:from-[#037fae]/30 before:to-white/10 before:blur-2xl`}
+    >
+      <div className="relative flex justify-between items-center gap-8 z-10">
+        {/* Logo */}
+        <div
+          onClick={() => scrollTo("hero")}
+          className="cursor-pointer font-extrabold text-base md:text-xl text-sky-900 hover:text-[#037fae] transition-colors flex items-center gap-2"
+        >
+          ירדן לוי | טיפול ספורטיבי
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:block relative nav-container">
+          <ul className="flex gap-3 items-center relative">
+            {navItems.map(({ id, label, icon }) => (
+              <li key={id} className="relative">
+                <button
+                  ref={(el) => (desktopRefs.current[id] = el)}
+                  onClick={() => scrollTo(id)}
+                  className={getDesktopButtonClass(id)}
+                >
+                  <span className="flex items-center gap-1">{icon} {label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {/* Shared animated underline */}
+          {activeButtonRect && (
+            <motion.div
+              layout
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="absolute bottom-0 h-[2px] bg-[#037fae] rounded-full will-change-transform-opacity"
+              style={{
+                left: activeButtonRect.left,
+                width: activeButtonRect.width,
+              }}
+            />
+          )}
+        </div>
+
+        {/* Mobile Toggle */}
         <button
           aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`select-none md:hidden rounded focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-300 ${
-            scrolled ? "text-teal-600" : "text-blue-900"
-          }`}
+          className="md:hidden text-sky-800 hover:text-[#037fae]"
         >
-          {menuOpen ? <X size={32} /> : <List size={32} />}
+          {menuOpen ? <X size={28} /> : <List size={28} />}
         </button>
       </div>
 
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {menuOpen && (
           <motion.ul
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-white shadow-lg border-t border-gray-200 px-6 pb-6 space-y-5"
-          >
-            {navItems.map(({ id, label }) => (
+            className="md:hidden mt-4 bg-white/80 backdrop-blur-md shadow-lg border border-gray-200 px-4 pb-4 space-y-3 rounded-xl will-change-transform-opacity"          >
+            {navItems.map(({ id, label, icon }) => (
               <motion.li
                 key={id}
                 whileHover={{ scale: 1.05 }}
@@ -97,16 +155,19 @@ const Navbar = () => {
               >
                 <button
                   onClick={() => scrollTo(id)}
-                  className="select-none block w-full text-right text-teal-700 font-semibold px-5 py-3 rounded-full hover:bg-teal-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className={getMobileButtonClass(id)}
                 >
-                  {label}
+                  <span className="inline-flex items-center gap-1">
+                    {icon}
+                    {label}
+                  </span>
                 </button>
               </motion.li>
             ))}
           </motion.ul>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

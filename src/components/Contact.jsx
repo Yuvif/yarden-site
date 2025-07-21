@@ -1,106 +1,170 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import './Contact.css'; // Still needed for blob animation
+import React from "react";
+import { motion } from "framer-motion";
+import { Phone, EnvelopeSimple, MapPin } from "@phosphor-icons/react";
+import contactImg from "../assets/d5f20086-d8a1-4bf1-8c4d-35d912b06af3.jpg";
 
-const Contact = () => (
-  <section
-    id="contact"
-    className="select-none relative scroll-mt-32 py-28 px-6 md:px-20 bg-gradient-to-b from-[#e4f3ff] to-[#f9feff] text-gray-800 overflow-hidden"
-  >
-    {/* Background Blobs */}
-    <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
-      <div className="blob blob-1"></div>
-      <div className="blob blob-2"></div>
-    </div>
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
 
-    <div className="relative z-10 max-w-7xl mx-auto">
-      <h2 className="text-4xl font-extrabold text-blue-700 mb-12 text-center">צור קשר</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Form */}
-        <motion.form
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="bg-white/50 backdrop-blur-xl p-10 rounded-3xl shadow-xl border border-white/30 space-y-6 will-change-transform"
-        >
-          <FloatingInput type="text" label="שם" />
-          <FloatingInput type="email" label="אימייל" />
-          <FloatingTextarea label="הודעה" />
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300"
-          >
-            שלח הודעה
-          </button>
-        </motion.form>
+const slideInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
 
-        {/* Info Panel */}
+const iconVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: (i) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: i * 0.15, duration: 0.4, ease: "easeOut" },
+  }),
+};
+
+const formVariants = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.7, duration: 0.7, ease: "easeOut" },
+  },
+};
+
+const Contact = () => {
+  return (
+    <section
+      id="contact"
+      dir="rtl"
+      className="w-full bg-[#f4f4f4] py-24 px-6 md:px-20 lg:px-28 text-gray-800 relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Side: Image with gentle floating animation + glow */}
         <motion.div
-          className="space-y-6 text-right bg-white/50 backdrop-blur-xl p-10 rounded-3xl border border-white/20 shadow-xl will-change-transform"
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={slideInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl will-change-transform-opacity"
+          style={{ perspective: 800 }}
+          animate={{
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         >
-          <ContactInfo label="📍 מיקום" value="לוי אשכול 196, קריית אונו" />
-          <ContactInfo
-            label="📞 טלפון"
-            value={<a href="tel:+97546197010" className="text-blue-600 hover:underline">054-6197010</a>}
+          {/* Ambient glow behind image */}
+          <div className="absolute -inset-10 rounded-3xl bg-[#4DA2BB]/20 blur-3xl pointer-events-none" />
+          <img
+            src={contactImg}
+            alt="טיפול פיזיותרפיה"
+            className="object-cover w-full h-full max-h-[600px] relative rounded-3xl z-10"
           />
-          <ContactInfo
-            label="📧 אימייל"
-            value={<a href="mailto:yard.levy@gmail.com" className="text-blue-600 hover:underline">yard.levy@gmail.com</a>}
-          />
-          <div className="w-full h-48 rounded-xl overflow-hidden border-2 border-blue-100 shadow-inner">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=YOUR_MAP_EMBED"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px] rounded-3xl z-20 pointer-events-none" />
+        </motion.div>
+
+        {/* Right Side: Contact info and form with staggered icon animations */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="space-y-10 will-change-transform-opacity"
+        >
+          <h2 className="text-4xl font-extrabold text-[#4DA2BB] mb-6">
+            צרו קשר
+          </h2>
+
+          {/* Contact Info with staggered icon animations */}
+          <div className="space-y-6 text-lg leading-relaxed font-medium text-gray-900">
+            {[{
+              icon: Phone,
+              label: "054-6197010",
+              key: "phone",
+            }, {
+              icon: EnvelopeSimple,
+              label: "yard.levy@gmail.com",
+              key: "email",
+            }, {
+              icon: MapPin,
+              label: "דרך לוי אשכול 196, קריית אונו",
+              key: "location",
+            }].map(({ icon: IconComp, label, key }, i) => (
+              <motion.div
+                key={key}
+                custom={i}
+                variants={iconVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="flex items-center gap-4 will-change-transform-opacity"
+              >
+                <IconComp size={28} color="rgba(186,186,186,1)" />
+                <span>{label}</span>
+              </motion.div>
+            ))}
           </div>
+
+          {/* Form slides in from right */}
+          <motion.form
+            variants={formVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mt-10 space-y-4 will-change-transform-opacity"
+          >
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className="font-semibold text-[#4DA2BB]">
+                שם מלא
+              </label>
+              <input
+                id="name"
+                type="text"
+                className="rounded-xl border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white/70 backdrop-blur placeholder-gray-400"
+                placeholder="הכניסו את שמכם"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="font-semibold text-[#4DA2BB]">
+                אימייל
+              </label>
+              <input
+                id="email"
+                type="email"
+                className="rounded-xl border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white/70 backdrop-blur placeholder-gray-400"
+                placeholder="הכניסו את כתובת המייל"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className="font-semibold text-[#4DA2BB]">
+                הודעה
+              </label>
+              <textarea
+                id="message"
+                rows={4}
+                className="rounded-xl border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white/70 backdrop-blur placeholder-gray-400"
+                placeholder="כתבו את הודעתכם כאן..."
+              />
+            </div>
+            <motion.button
+              type="submit"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 12px rgba(77,162,187,0.7)",
+              }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#4DA2BB] text-white font-bold px-8 py-3 rounded-xl hover:bg-[#005096] transition-all duration-200 will-change-transform-opacity"
+            >
+              שלח הודעה
+            </motion.button>
+          </motion.form>
         </motion.div>
       </div>
-    </div>
-  </section>
-);
-
-// Inputs
-const FloatingInput = ({ label, type }) => (
-  <div className="relative">
-    <input
-      type={type}
-      placeholder=" "
-      required
-      className="peer w-full p-4 pt-6 border-2 border-transparent rounded-lg text-right bg-white bg-opacity-80 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-    />
-    <label className="absolute right-4 top-4 text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm peer-focus:text-blue-600">
-      {label}
-    </label>
-  </div>
-);
-
-const FloatingTextarea = ({ label }) => (
-  <div className="relative">
-    <textarea
-      placeholder=" "
-      required
-      className="peer w-full p-4 pt-6 border-2 border-transparent rounded-lg h-32 text-right bg-white bg-opacity-80 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-    ></textarea>
-    <label className="absolute right-4 top-4 text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm peer-focus:text-blue-600">
-      {label}
-    </label>
-  </div>
-);
-
-// Info Block
-const ContactInfo = ({ label, value }) => (
-  <div className="relative pr-4">
-    <div className="absolute right-0 top-2 h-4 w-1.5 bg-blue-400 rounded-sm"></div>
-    <h3 className="text-xl font-semibold text-blue-900 mb-1">{label}</h3>
-    <p className="text-gray-700">{value}</p>
-  </div>
-);
+    </section>
+  );
+};
 
 export default Contact;
