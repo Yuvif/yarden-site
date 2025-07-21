@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-// 👇 Add your repo name here
 const repoName = 'yarden-site';
 
 export default defineConfig({
-  base: `/${repoName}/`, // 👈 Required for GitHub Pages
-  plugins: [react()],
+  base: `/${repoName}/`,
+  plugins: [
+    react(),
+    visualizer({
+      filename: 'dist/stats.html',
+      open: true,
+    }),
+  ],
 });

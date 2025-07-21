@@ -1,6 +1,6 @@
 import { Heart, Target, User } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
-import servicesBackground from "../assets/muscle-icon.png";
+import servicesBackground from "../compressed/muscle-icon.webp";
 const calmWave = new URL("../assets/calm-wave.svg", import.meta.url).href;
 
 

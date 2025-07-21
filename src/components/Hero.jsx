@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
-import logoBlue from "../assets/logo.png";
-import heroImage from "../assets/fitness-concept-with-dumbbells.jpg";
+import logoBlue from "../compressed/logo.webp";
+import heroImage from "../compressed/fitness-concept-with-dumbbells.webp";
 
 const deepTeal = "rgba(3,127,174,1)";
 const softGray = "rgba(185,185,185,1)";
@@ -108,10 +108,10 @@ const Hero = () => {
   }, [bgControls]);
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Background */}
       <motion.div
-        className="fixed inset-0 w-full h-full z-[-20] bg-center bg-cover select-none will-change-transform-opacity"
+        className="absolute sm:fixed inset-0 w-full h-full z-[-20] bg-center bg-cover select-none"
         style={{ backgroundImage: `url(${heroImage})` }}
         animate={bgControls}
         initial={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
       </motion.div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 select-none">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
         {/* Logo */}
         <motion.img
           src={logoBlue}

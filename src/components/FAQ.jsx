@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Question, CaretDown } from "@phosphor-icons/react";
-import faqBackground from "../assets/2362365.jpg";
+import faqBackground from "../compressed/2362365.webp";
 
 const faqData = [
   {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -6,7 +6,9 @@ import Services from "./components/Services";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import SocialBar from "./components/SocialBar";
-import Recommendations from "./components/Recommendations";
+
+// Lazy load Recommendations
+const Recommendations = React.lazy(() => import("./components/Recommendations"));
 
 const App = () => {
   return (
@@ -16,10 +18,12 @@ const App = () => {
         <Hero />
         <About />
         <Services />
-        <Recommendations />
+        <Suspense fallback={<div className="text-center py-20 text-gray-400">טוען המלצות...</div>}>
+          <Recommendations />
+        </Suspense>
         <FAQ />
         <Contact />
-        <SocialBar/>
+        <SocialBar />
       </main>
       <footer className="text-center text-gray-600 py-6 bg-white select-none">
         © {new Date().getFullYear()} Yuvif

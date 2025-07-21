@@ -4,9 +4,9 @@ import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 
-import aboutImg1 from "../assets/about1.jpeg";
-import aboutImg2 from "../assets/about2.jpeg";
-import aboutImg3 from "../assets/about3.jpeg";
+import aboutImg1 from "../compressed/about1.webp";
+import aboutImg2 from "../compressed/about2.webp";
+import aboutImg3 from "../compressed/about3.webp";
 
 const images = [aboutImg1, aboutImg2, aboutImg3];
 
