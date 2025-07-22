@@ -24,27 +24,25 @@ const Hero = () => {
 
   return (
     <section className="relative w-full min-h-[85svh] overflow-hidden text-white flex items-center justify-start px-4 sm:px-10 pt-[96px] sm:pt-50 select-none">
+
   {/* Responsive Background Image */}
   <motion.img
     src={heroImage}
     alt="Physiotherapy session"
-    className="inset-0 w-full h-full object-cover object-center z-[-10]
-               absolute sm:fixed"
-    animate={bgControls}
-    initial={{ opacity: 1, y: 0 }}
+    className="inset-0 w-full h-full object-cover object-center z-[-10] absolute sm:fixed"
   />
 
-  {/* Overlay */}
+  {/* Overlay for contrast */}
   <div className="absolute inset-0 z-[-9] bg-gradient-to-b from-black/40 via-black/10 to-black/60" />
 
   {/* Logo */}
   <img
     src={logoBlue}
     alt="לוגו"
-    className="absolute top-[6rem] right-4 sm:top-10 sm:right-10 w-24 sm:w-44 drop-shadow-[0_0_18px_rgba(3,127,174,0.5)]"
+    className="absolute top-6 right-2 sm:top-10 sm:right-10 w-20 sm:w-44 drop-shadow-[0_0_18px_rgba(3,127,174,0.5)]"
   />
 
-  {/* Text Content */}
+  {/* Hero Content */}
   <div className="z-10 max-w-md text-left">
     <motion.h1
       className="text-4xl sm:text-7xl font-extrabold leading-tight"
