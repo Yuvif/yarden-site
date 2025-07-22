@@ -80,7 +80,7 @@ const FAQ = () => {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="flex justify-between w-full items-center text-[#2e5969] text-xl font-bold group"
+                className="flex justify-between w-full items-center text-[#2e5969] text-2xl font-bold group"
               >
                 <span className="flex items-center gap-3">
                   <Question size={26} className="text-[#4DA2BB]" />
@@ -105,7 +105,7 @@ const FAQ = () => {
                     transition={{ duration: 0.35 }}
                     className="overflow-hidden will-change-transform-opacity"
                   >
-                    <div className="mt-6 text-lg space-y-4 leading-relaxed bg-[#e6f7fb]/70 p-6 rounded-xl text-[#2e5969] font-[500]">
+                    <div className="mt-6 text-2xl space-y-4 leading-relaxed bg-[#e6f7fb]/70 p-6 rounded-xl text-[#2e5969] font-[500]">
                       {item.answer.map((text, idx) => (
                         <p key={idx}>{text}</p>
                       ))}

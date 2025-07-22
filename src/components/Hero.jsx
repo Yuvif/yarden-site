@@ -23,12 +23,12 @@ const Hero = () => {
   }, [bgControls]);
 
   return (
-    <section className="relative w-full min-h-[100svh] overflow-hidden text-white flex items-center justify-start px-6 sm:px-10">
+    <section className="relative w-full min-h-[100svh] overflow-hidden text-white flex items-center justify-start px-6 sm:px-10 select-none">
       {/* Fixed Background */}
       <motion.img
         src={heroImage}
         alt="Physiotherapy session"
-        className="fixed inset-0 w-full h-full object-cover z-[-10] pointer-events-none"
+        className="fixed inset-0 w-full h-full object-cover object-center z-[-10]"
         animate={bgControls}
         initial={{ opacity: 1, y: 0 }}
       />
@@ -36,7 +36,6 @@ const Hero = () => {
       {/* Overlay */}
       <div className="fixed inset-0 z-[-9] bg-gradient-to-b from-black/40 via-black/10 to-black/60" />
 
-      {/* Logo in top-left */}
       <img
         src={logoBlue}
         alt="לוגו"
@@ -46,7 +45,7 @@ const Hero = () => {
       {/* Text + CTA */}
       <div className="z-10 mt-20 max-w-xl text-left sm:mt-36">
         <motion.h1
-          className="text-3xl sm:text-8xl font-extrabold leading-tight"
+          className="text-3xl sm:text-8xl font-extrabold leading-tight select-none"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -58,7 +57,7 @@ const Hero = () => {
 
         {showPainFree && (
           <motion.h2
-            className="text-lg sm:text-2xl mt-4 font-medium italic bg-gradient-to-r from-[#037fae] to-[#05b0db] bg-clip-text text-transparent"
+            className="text-lg sm:text-2xl mt-4 font-medium italic bg-gradient-to-r from-[#037fae] to-[#05b0db] bg-clip-text text-transparent select-none"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -71,7 +70,7 @@ const Hero = () => {
         {/* CTA Button */}
         <motion.a
           href="#contact"
-          className="inline-block mt-6 px-6 py-3 bg-[#037fae] text-white font-semibold rounded-full shadow-md hover:bg-[#059ccd] transition-all duration-300"
+          className="inline-block mt-6 px-6 py-3 bg-[#037fae] text-white font-semibold rounded-full shadow-md hover:bg-[#059ccd] transition-all duration-300 select-none"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}

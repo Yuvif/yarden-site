@@ -67,10 +67,10 @@ const Navbar = () => {
   };
 
   const getDesktopButtonClass = (id) =>
-    `relative select-none text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-1 ${
+    `relative select-none text-base md:text-2xl font-medium px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-1 ${
       activeSection === id
         ? "text-white bg-[#037fae] shadow"
-        : "text-sky-900 hover:text-[#037fae] hover:bg-white/30"
+        : "text-white hover:text-[#037fae] hover:bg-white/30"
     }`;
 
   const getMobileButtonClass = (id) =>
@@ -87,14 +87,13 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
       className={`will-change-transform-opacity fixed top-6 left-0 right-0 mx-auto w-fit max-w-full px-6 py-3 z-50 rounded-full transition-all duration-300 backdrop-blur-md border border-white/20 ${
-        scrolled ? "shadow-lg bg-white/60" : "shadow-xl bg-white/40"
+        scrolled ? "shadow-lg bg-white/60 text-sky-900" : "shadow-xl bg-white/10 text-white"
       } hover:shadow-2xl before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-r before:from-[#037fae]/30 before:to-white/10 before:blur-2xl`}
     >
-      <div className="relative flex justify-between items-center gap-8 z-10">
-        {/* Logo */}
+      <div className="relative flex justify-between items-center gap-8 z-10 select-none">
         <div
           onClick={() => scrollTo("hero")}
-          className="cursor-pointer font-extrabold text-base md:text-xl text-sky-900 hover:text-[#037fae] transition-colors flex items-center gap-2"
+          className="cursor-pointer font-extrabold text-base md:text-xl hover:text-[#037fae] transition-colors flex items-center gap-2"
         >
           ירדן לוי | טיפול ספורטיבי
         </div>
@@ -114,18 +113,6 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          {/* Shared animated underline */}
-          {activeButtonRect && (
-            <motion.div
-              layout
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="absolute bottom-0 h-[2px] bg-[#037fae] rounded-full will-change-transform-opacity"
-              style={{
-                left: activeButtonRect.left,
-                width: activeButtonRect.width,
-              }}
-            />
-          )}
         </div>
 
         {/* Mobile Toggle */}

@@ -61,10 +61,10 @@ const Services = () => (
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-[#037fae] mb-3 drop-shadow-sm">
+            <h3 className="text-3xl font-bold text-[#037fae] mb-3 drop-shadow-sm">
               {title}
             </h3>
-            <p className="text-lg text-gray-800 leading-relaxed">{desc}</p>
+            <p className="text-xl text-gray-800 leading-relaxed">{desc}</p>
           </motion.div>
         ))}
       </div>
