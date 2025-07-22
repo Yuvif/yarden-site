@@ -1,11 +1,12 @@
-import React, { Suspense } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Services from "./components/Services";
-import FAQ from "./components/FAQ";
-import Contact from "./components/Contact";
-import SocialBar from "./components/SocialBar";
+import React, { lazy, Suspense } from "react";
+const Navbar = lazy(() =>import('./components/Navbar'))
+const Hero = lazy(() =>import('./components/Hero'))
+const About = lazy(() =>import('./components/About'))
+const Services = lazy(() =>import('./components/Services'))
+const FAQ = lazy(() =>import('./components/FAQ'))
+const Contact = lazy(() =>import('./components/Contact'))
+const SocialBar = lazy(() =>import('./components/SocialBar'))
+
 
 // Lazy load Recommendations
 const Recommendations = React.lazy(() => import("./components/Recommendations"));
@@ -19,7 +20,7 @@ const App = () => {
         <About />
         <Services />
         <Suspense fallback={<div className="text-center py-20 text-gray-400">טוען המלצות...</div>}>
-          <Recommendations />
+
         </Suspense>
         <FAQ />
         <Contact />

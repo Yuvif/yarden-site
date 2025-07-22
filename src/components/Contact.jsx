@@ -7,7 +7,7 @@ const Contact = () => {
     <section
       id="contact"
       dir="rtl"
-      className="w-full bg-[#f4f4f4] py-24 px-6 md:px-20 lg:px-28 text-gray-800 relative overflow-hidden"
+      className="w-full bg-[#f4f4f4] py-24 px-6 md:px-20 lg:px-28 text-gray-800 relative overflow-hidden select-none"
     >
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side: Static image with glow */}
